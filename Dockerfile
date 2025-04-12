@@ -1,20 +1,14 @@
-# Use a specific Node.js version with Alpine for a smaller image size
-FROM node:19-alpine
+# Use official Node.js image
+FROM node:19
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to leverage Docker's caching
-COPY package*.json ./
+# Copy the rest of the source code
+COPY . /app/
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
-COPY . .
-
-# Expose the application's port
-EXPOSE 3000
-
-# Start the application
+# Command to start the development server
 CMD ["npm", "start"]
